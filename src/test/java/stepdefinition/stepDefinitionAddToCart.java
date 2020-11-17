@@ -129,7 +129,11 @@ public class stepDefinitionAddToCart
 
     @Then("I should see both products added to cart")
     public void i_should_see_both_products_added_to_cart()
-    {   
+    {
+        //Count products from cart
+        List<WebElement> numberOfItemsAddedToCart = driver.findElements(By.xpath("//div[@class='cart-products-box']/div[contains(@class, 'cart-product-box')]"));
+        Assert.assertEquals(2,numberOfItemsAddedToCart.size());
+
         WebElement cartTitle = driver.findElement(By.xpath("//div[contains(text(),'Cosul de cumparaturi')]"));
         Assert.assertEquals("COSUL DE CUMPARATURI", cartTitle.getText());
 
@@ -138,9 +142,5 @@ public class stepDefinitionAddToCart
 
         WebElement secondItemAdded = driver.findElement(By.xpath("//div[@class='cart-products-box']/div[contains(@class, 'cart-product-box')][2]//div[@class='product-name']"));
         Assert.assertEquals(secondItemName, secondItemAdded.getText());
-
-        //Count products from cart
-        List<WebElement> numberOfItemsAddedToCart = driver.findElements(By.xpath("//div[@class='cart-products-box']/div[contains(@class, 'cart-product-box')]"));
-        Assert.assertEquals(2,numberOfItemsAddedToCart.size());
     }
 }
